@@ -567,64 +567,70 @@ function buildMsg(order, type) {
   const tot=order.items.reduce((s,i)=>s+i.total,0);
 
   // 1) ORDER CONFIRM
-  if(type==='confirm') return `🏢 *ಶ್ರೀ ಸಿದ್ಧಿವಿನಾಯಕ ಟ್ರೇಡಿಂಗ್ ಕಂಪನಿ*
-📍 ನಂಜನಗೂಡು
+  if(type==='confirm') return '
 
-✅ *Your Order is Confirmed!*
-📅 ${ds}  🕐 ${ts}
+*S V T*
+ನಂಜನಗೂಡು
 
-👤 *ಗ್ರಾಹಕರು:* ${order.name}
+ORDER CONFIRMED
+${ds} | ${ts}
 
-📦 *Items:*
+ಗ್ರಾಹಕರು: ${order.name}
+
 ${lines}
 
-💰 *ಒಟ್ಟು ಮೊತ್ತ: ₹${tot}*${order.note?'\n📝 '+order.note:''}
+ಒಟ್ಟು: ₹${tot}
 
-🎉 ನಿಮ್ಮ ಆರ್ಡರ್ Confirm ಮಾಡಲಾಗಿದೆ
-ಧನ್ಯವಾದಗಳು 🙏`;
+ನಿಮ್ಮ ಆರ್ಡರ್ Confirm ಮಾಡಲಾಗಿದೆ
+ಧನ್ಯವಾದಗಳು 🙏{order.note?'\n📝 '+order.note:''}
+
+
 
   // 3) FULL DELIVERY
-  if(type==='full') return `🏢 *ಶ್ರೀ ಸಿದ್ಧಿವಿನಾಯಕ ಟ್ರೇಡಿಂಗ್ ಕಂಪನಿ*
-📍 ನಂಜನಗೂಡು
+  if(type==='full') return `
+ *S V T*
+ನಂಜನಗೂಡು
 
-🚚 *Delivery ಆಗಲಿದೆ!*
-📅 ${ds}  🕐 ${ts}
+DELIVERY CONFIRMED
+${ds} | ${ts}
 
-👤 *ಗ್ರಾಹಕರು:* ${order.name}
+ಗ್ರಾಹಕರು: ${order.name}
 
-📦 *Items:*
 ${lines}
 
-💰 *ಒಟ್ಟು ಮೊತ್ತ: ₹${tot}*
+ಒಟ್ಟು: ₹${tot}
 
-🚛 ಶೀಘ್ರದಲ್ಲಿ Delivery ಆಗುತ್ತದೆ
-✅ ನಿಮ್ಮ ಪೂರ್ಣ ಆರ್ಡರ್ ನೀಡಲಾಗಿದೆ
-ಧನ್ಯವಾದಗಳು 🙏`;
+ಅತಿ ಶೀಘ್ರದಲ್ಲಿ delivery ಆಗಲಿದೆ
+ನಿಮ್ಮ order ಪೂರ್ಣ ಗೊಂಡಿದೆ
+ಧನ್ಯವಾದಗಳು 🙏
+
+🚚
 
   // 2) PARTIAL DELIVERY
-  return `🏢 *ಶ್ರೀ ಸಿದ್ಧಿವಿನಾಯಕ ಟ್ರೇಡಿಂಗ್ ಕಂಪನಿ*
-📍 ನಂಜನಗೂಡು
+  return `*S V T*
 
-🚚 *Delivery ಆಗಲಿದೆ!*
-📅 ${ds}  🕐 ${ts}
 
-👤 *ಗ್ರಾಹಕರು:* ${order.name}
+ನಂಜನಗೂಡು
 
-📦 *Items:*
+PARTIAL DELIVERY
+${ds} | ${ts}
+
+ಗ್ರಾಹಕರು: ${order.name}
+
 ${lines}
 
-💰 *ಒಟ್ಟು ಮೊತ್ತ: ₹${tot}*
+ಒಟ್ಟು: ₹${tot}
 
-🚛 ಶೀಘ್ರದಲ್ಲಿ Delivery ಆಗುತ್ತದೆ
-📦 ಉಳಿದ ಬಾಕಿ ಕೆಲವೇ ದಿನಗಳಲ್ಲಿ ನೀಡಲಾಗುವುದು
+ಶೀಘ್ರದಲ್ಲಿ Delivery ಆಗುತ್ತದೆ
+ಉಳಿದ ಬಾಕಿ ಕೆಲವೇ ದಿನಗಳಲ್ಲಿ ನೀಡಲಾಗುವುದು
 ಧನ್ಯವಾದಗಳು 🙏`;
-}
+
 function buildBalanceMsg(order) {
   const p=order.items.filter(i=>i.bags-(i.delivered||0)>0);
   const lines=p.map(i=>{const r=i.bags-(i.delivered||0); return `${i.emoji} ${i.name} - ${r} bags x ${i.kg}kg = ${r*i.kg}kg @ ₹${i.rate}/bag = ₹${r*i.rate}`;}).join('\n');
   const tot=p.reduce((s,i)=>s+(i.bags-(i.delivered||0))*i.rate,0);
-  return `🙏 *ಶ್ರೀ ಸಿದ್ಧಿವಿನಾಯಕ ಟ್ರೇಡಿಂಗ್ ಕೂ, ನಂಜನಗೂಡು*
-
+  return `🙏
+*S V T*
 ⚖️ *Balance Items*
 
 👤 *ಗ್ರಾಹಕರು:* ${order.name}
